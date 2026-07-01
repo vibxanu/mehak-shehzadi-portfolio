@@ -26,9 +26,9 @@ import {
 } from "lucide-react";
 import {
   SiBootstrap,
-  SiCanva,
+  SiCanvas,
   SiCplusplus,
-  SiCss3,
+  SiCss,
   SiFigma,
   SiFirebase,
   SiGit,
