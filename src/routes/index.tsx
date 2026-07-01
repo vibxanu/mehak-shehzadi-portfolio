@@ -845,19 +845,11 @@ function Contact() {
 
     try {
       setStatus("loading");
-      // EmailJS wiring — set VITE_EMAILJS_SERVICE_ID / TEMPLATE_ID / PUBLIC_KEY to enable
-      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID as string | undefined;
-      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string | undefined;
-      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string | undefined;
-
-      if (serviceId && templateId && publicKey && formRef.current) {
-        const emailjs = await import("@emailjs/browser");
-        await emailjs.default.sendForm(serviceId, templateId, formRef.current, { publicKey });
-      } else {
-        // Graceful fallback — open mail client
-        const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
-        window.location.href = `mailto:${social.email}?subject=${encodeURIComponent(subject)}&body=${body}`;
-      }
+      const { supabase } = await import("@/integrations/supabase/client");
+      const { error: dbError } = await supabase
+        .from("contact_messages")
+        .insert({ name, email, subject, message });
+      if (dbError) throw dbError;
       setStatus("success");
       e.currentTarget.reset();
     } catch (err) {
