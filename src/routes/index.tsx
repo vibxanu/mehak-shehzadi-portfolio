@@ -106,7 +106,7 @@ const skillGroups = [
     icon: Code2,
     items: [
       { name: "HTML5", Icon: SiHtml5, color: "#E34F26" },
-      { name: "CSS3", Icon: SiCss3, color: "#1572B6" },
+      { name: "CSS3", Icon: SiCss, color: "#1572B6" },
       { name: "JavaScript", Icon: SiJavascript, color: "#F7DF1E" },
       { name: "React", Icon: SiReact, color: "#61DAFB" },
       { name: "Tailwind", Icon: SiTailwindcss, color: "#06B6D4" },
@@ -138,7 +138,7 @@ const skillGroups = [
       { name: "GitHub", Icon: SiGithub, color: "#ffffff" },
       { name: "VS Code", Icon: VscVscode, color: "#007ACC" },
       { name: "Figma", Icon: SiFigma, color: "#F24E1E" },
-      { name: "Canva", Icon: SiCanva, color: "#00C4CC" },
+      { name: "Canva", Icon: SiCanvas, color: "#00C4CC" },
     ],
   },
   {
