@@ -862,17 +862,33 @@ function Contact() {
 
     try {
       setStatus("loading");
+
+      // 1) Save to backend (durable record)
       const { supabase } = await import("@/integrations/supabase/client");
-      const { error: dbError } = await supabase
-        .from("contact_messages")
-        .insert({ name, email, subject, message });
-      if (dbError) throw dbError;
+      await supabase.from("contact_messages").insert({ name, email, subject, message });
+
+      // 2) Deliver email to inbox via FormSubmit (no API key required)
+      const res = await fetch("https://formsubmit.co/ajax/04mehakshehzadi@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          subject,
+          message,
+          _subject: `Portfolio contact: ${subject}`,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+      if (!res.ok) throw new Error(`Email service responded ${res.status}`);
+
       setStatus("success");
       e.currentTarget.reset();
     } catch (err) {
       console.error(err);
       setStatus("error");
-      setError("Something went wrong. Please try again or email me directly.");
+      setError("Something went wrong while sending your message. Please try again or email me directly at 04mehakshehzadi@gmail.com.");
     }
   };
 
