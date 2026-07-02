@@ -48,10 +48,10 @@ import { Counter } from "@/components/portfolio/Counter";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import heroIllustration from "@/assets/hero-illustration.png";
 import aboutIllustration from "@/assets/about-illustration.png";
-import projectAiAssistant from "@/assets/project-ai-assistant.png";
-import projectAdidas from "@/assets/project-adidas.png";
-import projectMultiquiz from "@/assets/project-multiquiz.png";
-import projectTodo from "@/assets/project-todo.png";
+import projectAiAssistant from "@/assets/cover-ai-assistant.jpg";
+import projectAdidas from "@/assets/cover-adidas.jpg";
+import projectMultiquiz from "@/assets/cover-multiquiz.jpg";
+import projectTodo from "@/assets/cover-todo.jpg";
 
 const HeroScene = lazy(() => import("@/components/portfolio/HeroScene"));
 
@@ -686,48 +686,61 @@ function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.6, delay: i * 0.06 }}
-              whileHover={{ y: -6 }}
-              className="group flex h-full flex-col overflow-hidden rounded-3xl glass-strong"
+              whileHover={{ y: -8 }}
+              className="group relative flex h-full flex-col overflow-hidden rounded-3xl glass-strong ring-1 ring-white/10 shadow-elegant transition-shadow duration-500 hover:shadow-glow-strong"
             >
               <div className="relative aspect-[16/10] overflow-hidden">
                 <img
                   src={p.image}
-                  alt={p.title}
+                  alt={`${p.title} cover`}
                   loading="lazy"
                   width={1280}
-                  height={832}
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                  height={800}
+                  className="h-full w-full object-cover transition duration-[900ms] ease-out group-hover:scale-[1.08]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-accent/20 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
               </div>
-              <div className="flex flex-1 flex-col p-6">
-                <h3 className="text-xl font-semibold">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
+
+              <div className="flex flex-1 flex-col p-7">
+                <h3 className="text-2xl font-semibold tracking-tight">{p.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+
+                <div className="mt-5 flex flex-wrap gap-2">
                   {p.tags.map((t) => (
                     <span
                       key={t}
-                      className="rounded-full bg-white/5 px-3 py-1 text-[11px] text-muted-foreground"
+                      className="rounded-full bg-white/5 px-3 py-1 text-[11px] font-medium tracking-wide text-muted-foreground ring-1 ring-white/10"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
-                <div className="mt-6 flex items-center gap-3 pt-4">
+
+                <div className="mt-6 flex items-center gap-2 text-xs font-medium text-muted-foreground">
+                  <Github size={14} className="text-foreground/80" />
+                  <span className="text-foreground/80">GitHub Repo</span>
+                </div>
+                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                  Click below to view the complete source code and project files on GitHub.
+                </p>
+
+                <div className="mt-auto flex items-center gap-3 pt-6">
                   <a
                     href={p.github}
                     target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full glass px-4 py-2 text-xs font-medium transition hover:-translate-y-0.5"
+                    rel="noopener noreferrer"
+                    aria-label={`View ${p.title} source code on GitHub`}
+                    className="inline-flex items-center gap-2 rounded-full bg-gradient-primary px-5 py-2.5 text-xs font-semibold text-primary-foreground shadow-glow transition hover:-translate-y-0.5 hover:shadow-glow-strong"
                   >
-                    <Github size={14} /> Code
+                    <Github size={14} /> GitHub Repository
                   </a>
                   {p.demo ? (
                     <a
                       href={p.demo}
                       target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full bg-gradient-primary px-4 py-2 text-xs font-medium text-primary-foreground shadow-glow transition hover:-translate-y-0.5"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full glass px-5 py-2.5 text-xs font-semibold transition hover:-translate-y-0.5"
                     >
                       Live demo <ArrowRight size={14} />
                     </a>
@@ -735,7 +748,7 @@ function Projects() {
                     <span
                       aria-disabled="true"
                       title="Live demo coming soon"
-                      className="inline-flex cursor-not-allowed items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-xs font-medium text-muted-foreground ring-1 ring-white/10"
+                      className="inline-flex cursor-not-allowed items-center gap-2 rounded-full bg-white/5 px-5 py-2.5 text-xs font-semibold text-muted-foreground ring-1 ring-white/10"
                     >
                       Coming Soon
                     </span>
