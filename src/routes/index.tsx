@@ -722,14 +722,24 @@ function Projects() {
                   >
                     <Github size={14} /> Code
                   </a>
-                  <a
-                    href={p.demo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-gradient-primary px-4 py-2 text-xs font-medium text-primary-foreground shadow-glow transition hover:-translate-y-0.5"
-                  >
-                    Live demo <ArrowRight size={14} />
-                  </a>
+                  {p.demo ? (
+                    <a
+                      href={p.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-gradient-primary px-4 py-2 text-xs font-medium text-primary-foreground shadow-glow transition hover:-translate-y-0.5"
+                    >
+                      Live demo <ArrowRight size={14} />
+                    </a>
+                  ) : (
+                    <span
+                      aria-disabled="true"
+                      title="Live demo coming soon"
+                      className="inline-flex cursor-not-allowed items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-xs font-medium text-muted-foreground ring-1 ring-white/10"
+                    >
+                      Coming Soon
+                    </span>
+                  )}
                 </div>
               </div>
             </motion.article>
