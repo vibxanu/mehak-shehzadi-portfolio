@@ -48,10 +48,10 @@ import { Counter } from "@/components/portfolio/Counter";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import heroIllustration from "@/assets/hero-illustration.png";
 import aboutIllustration from "@/assets/about-illustration.png";
-import projectEcommerce from "@/assets/project-ecommerce.jpg";
-import projectPortfolio from "@/assets/project-portfolio.jpg";
-import projectAi from "@/assets/project-ai.jpg";
-import projectDashboard from "@/assets/project-dashboard.jpg";
+import projectAiAssistant from "@/assets/project-ai-assistant.png";
+import projectAdidas from "@/assets/project-adidas.png";
+import projectMultiquiz from "@/assets/project-multiquiz.png";
+import projectTodo from "@/assets/project-todo.png";
 
 const HeroScene = lazy(() => import("@/components/portfolio/HeroScene"));
 
