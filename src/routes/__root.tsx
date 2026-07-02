@@ -78,7 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Portfolio of Mehak Shehzadi — BS IT student, Frontend & React developer crafting responsive, interactive, AI-forward web experiences.",
       },
       { name: "author", content: "Mehak Shehzadi" },
-      { property: "og:title", content: "Mehak Shehzadi — Frontend & React Developer" },
+      { property: "og:title", content: "Mehak Shehzadi — Frontend & React Developer Portfolio" },
       {
         property: "og:description",
         content:
@@ -86,6 +86,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Mehak Shehzadi — Frontend & React Developer Portfolio" },
+      { name: "description", content: "Mehak's Digital Canvas is a premium, original portfolio website showcasing a frontend developer's skills." },
+      { property: "og:description", content: "Mehak's Digital Canvas is a premium, original portfolio website showcasing a frontend developer's skills." },
+      { name: "twitter:description", content: "Mehak's Digital Canvas is a premium, original portfolio website showcasing a frontend developer's skills." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/12bc3ead-d2db-4389-8b10-7713c9a0d4e3/id-preview-10051b16--db3c2b12-b95e-4c6e-8b5d-878b98416757.lovable.app-1782919297400.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/12bc3ead-d2db-4389-8b10-7713c9a0d4e3/id-preview-10051b16--db3c2b12-b95e-4c6e-8b5d-878b98416757.lovable.app-1782919297400.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
