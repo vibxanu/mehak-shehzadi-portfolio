@@ -153,38 +153,45 @@ const skillGroups = [
   },
 ];
 
-const projects = [
+const projects: {
+  title: string;
+  desc: string;
+  image: string;
+  tags: string[];
+  github: string;
+  demo: string | null;
+}[] = [
   {
-    title: "Aurora Commerce",
-    desc: "A polished React storefront with cart, filters, and animated product galleries built for a modern, mobile-first shopping experience.",
-    image: projectEcommerce,
-    tags: ["React", "Tailwind", "Framer Motion"],
-    github: social.github,
-    demo: "#",
+    title: "AI Assistant Pro",
+    desc: "An AI-powered study assistant that generates summaries, quizzes, questions and study plans for students, built with Python and Streamlit.",
+    image: projectAiAssistant,
+    tags: ["Python", "Streamlit", "AI", "NLP"],
+    github: "https://github.com/vibxanu/ai-assistant-pro",
+    demo: null,
   },
   {
-    title: "Portfolio v2",
-    desc: "This very portfolio — a glassmorphism-driven, Three.js enhanced showcase built with React, Tailwind and Framer Motion.",
-    image: projectPortfolio,
-    tags: ["React", "Three.js", "Framer Motion"],
-    github: social.github,
-    demo: "#",
+    title: "Adidas PSD Task",
+    desc: "A responsive Adidas-inspired landing page featuring a hero slider, thumbnail carousel, video popup and validated contact form.",
+    image: projectAdidas,
+    tags: ["HTML", "CSS", "JavaScript", "Responsive"],
+    github: "https://github.com/vibxanu/adidas-psd-task",
+    demo: null,
   },
   {
-    title: "Nova AI Chat",
-    desc: "Conversational AI interface with streaming responses, prompt library and beautifully animated message bubbles.",
-    image: projectAi,
-    tags: ["React", "AI APIs", "Tailwind"],
-    github: social.github,
-    demo: "#",
+    title: "MultiQuiz Website",
+    desc: "An interactive quiz web app with an MCQ engine, live scoring and a clean result page — pure HTML, CSS and JavaScript.",
+    image: projectMultiquiz,
+    tags: ["HTML", "CSS", "JavaScript"],
+    github: "https://github.com/vibxanu/multiquiz-website",
+    demo: null,
   },
   {
-    title: "Flow Task Dashboard",
-    desc: "Kanban-style task manager with drag interactions, animated charts and a clean, keyboard-friendly workflow.",
-    image: projectDashboard,
-    tags: ["React", "Charts", "UI/UX"],
-    github: social.github,
-    demo: "#",
+    title: "Todo List App",
+    desc: "A minimal todo list with due dates, Low/Medium/High priorities and local-storage persistence so tasks stay across sessions.",
+    image: projectTodo,
+    tags: ["HTML", "CSS", "JavaScript", "LocalStorage"],
+    github: "https://github.com/vibxanu/todo-list",
+    demo: null,
   },
 ];
 
