@@ -955,7 +955,7 @@ function Contact() {
               <p className="mt-3 text-xs text-destructive">{error}</p>
             )}
             {status === "success" && (
-              <p className="mt-3 text-xs text-green-400">Thanks! Your message is on its way.</p>
+              <p className="mt-3 text-xs text-green-400">Thank you! Your message has been sent successfully.</p>
             )}
 
             <button
