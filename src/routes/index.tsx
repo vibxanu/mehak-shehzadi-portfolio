@@ -1094,8 +1094,10 @@ function Footer() {
 
             <div>
               <h4 className="text-sm font-semibold">Say hello</h4>
-              <div className="mt-3 flex flex-col gap-2 text-sm text-muted-foreground">
+              <div class-x="" className="mt-3 flex flex-col gap-2 text-sm text-muted-foreground">
                 <a href={`mailto:${social.email}`} className="hover:text-foreground">{social.email}</a>
+                <a href={social.github} target="_blank" rel="noreferrer" className="hover:text-foreground">github.com/vibxanu</a>
+                <a href={social.linkedin} target="_blank" rel="noreferrer" className="hover:text-foreground">linkedin.com/in/vibxanu</a>
                 <span>Sialkot, Pakistan</span>
               </div>
               <div className="mt-4 flex gap-2">
