@@ -48,10 +48,10 @@ import { Counter } from "@/components/portfolio/Counter";
 import { useTypewriter } from "@/hooks/useTypewriter";
 import heroIllustration from "@/assets/hero-illustration.png";
 import aboutIllustration from "@/assets/about-illustration.png";
-import projectEcommerce from "@/assets/project-ecommerce.jpg";
-import projectPortfolio from "@/assets/project-portfolio.jpg";
-import projectAi from "@/assets/project-ai.jpg";
-import projectDashboard from "@/assets/project-dashboard.jpg";
+import projectAiAssistant from "@/assets/project-ai-assistant.png";
+import projectAdidas from "@/assets/project-adidas.png";
+import projectMultiquiz from "@/assets/project-multiquiz.png";
+import projectTodo from "@/assets/project-todo.png";
 
 const HeroScene = lazy(() => import("@/components/portfolio/HeroScene"));
 
@@ -153,38 +153,45 @@ const skillGroups = [
   },
 ];
 
-const projects = [
+const projects: {
+  title: string;
+  desc: string;
+  image: string;
+  tags: string[];
+  github: string;
+  demo: string | null;
+}[] = [
   {
-    title: "Aurora Commerce",
-    desc: "A polished React storefront with cart, filters, and animated product galleries built for a modern, mobile-first shopping experience.",
-    image: projectEcommerce,
-    tags: ["React", "Tailwind", "Framer Motion"],
-    github: social.github,
-    demo: "#",
+    title: "AI Assistant Pro",
+    desc: "An AI-powered study assistant that generates summaries, quizzes, questions and study plans for students, built with Python and Streamlit.",
+    image: projectAiAssistant,
+    tags: ["Python", "Streamlit", "AI", "NLP"],
+    github: "https://github.com/vibxanu/ai-assistant-pro",
+    demo: null,
   },
   {
-    title: "Portfolio v2",
-    desc: "This very portfolio — a glassmorphism-driven, Three.js enhanced showcase built with React, Tailwind and Framer Motion.",
-    image: projectPortfolio,
-    tags: ["React", "Three.js", "Framer Motion"],
-    github: social.github,
-    demo: "#",
+    title: "Adidas PSD Task",
+    desc: "A responsive Adidas-inspired landing page featuring a hero slider, thumbnail carousel, video popup and validated contact form.",
+    image: projectAdidas,
+    tags: ["HTML", "CSS", "JavaScript", "Responsive"],
+    github: "https://github.com/vibxanu/adidas-psd-task",
+    demo: null,
   },
   {
-    title: "Nova AI Chat",
-    desc: "Conversational AI interface with streaming responses, prompt library and beautifully animated message bubbles.",
-    image: projectAi,
-    tags: ["React", "AI APIs", "Tailwind"],
-    github: social.github,
-    demo: "#",
+    title: "MultiQuiz Website",
+    desc: "An interactive quiz web app with an MCQ engine, live scoring and a clean result page — pure HTML, CSS and JavaScript.",
+    image: projectMultiquiz,
+    tags: ["HTML", "CSS", "JavaScript"],
+    github: "https://github.com/vibxanu/multiquiz-website",
+    demo: null,
   },
   {
-    title: "Flow Task Dashboard",
-    desc: "Kanban-style task manager with drag interactions, animated charts and a clean, keyboard-friendly workflow.",
-    image: projectDashboard,
-    tags: ["React", "Charts", "UI/UX"],
-    github: social.github,
-    demo: "#",
+    title: "Todo List App",
+    desc: "A minimal todo list with due dates, Low/Medium/High priorities and local-storage persistence so tasks stay across sessions.",
+    image: projectTodo,
+    tags: ["HTML", "CSS", "JavaScript", "LocalStorage"],
+    github: "https://github.com/vibxanu/todo-list",
+    demo: null,
   },
 ];
 
@@ -715,14 +722,24 @@ function Projects() {
                   >
                     <Github size={14} /> Code
                   </a>
-                  <a
-                    href={p.demo}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-gradient-primary px-4 py-2 text-xs font-medium text-primary-foreground shadow-glow transition hover:-translate-y-0.5"
-                  >
-                    Live demo <ArrowRight size={14} />
-                  </a>
+                  {p.demo ? (
+                    <a
+                      href={p.demo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-gradient-primary px-4 py-2 text-xs font-medium text-primary-foreground shadow-glow transition hover:-translate-y-0.5"
+                    >
+                      Live demo <ArrowRight size={14} />
+                    </a>
+                  ) : (
+                    <span
+                      aria-disabled="true"
+                      title="Live demo coming soon"
+                      className="inline-flex cursor-not-allowed items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-xs font-medium text-muted-foreground ring-1 ring-white/10"
+                    >
+                      Coming Soon
+                    </span>
+                  )}
                 </div>
               </div>
             </motion.article>
@@ -845,17 +862,33 @@ function Contact() {
 
     try {
       setStatus("loading");
+
+      // 1) Save to backend (durable record)
       const { supabase } = await import("@/integrations/supabase/client");
-      const { error: dbError } = await supabase
-        .from("contact_messages")
-        .insert({ name, email, subject, message });
-      if (dbError) throw dbError;
+      await supabase.from("contact_messages").insert({ name, email, subject, message });
+
+      // 2) Deliver email to inbox via FormSubmit (no API key required)
+      const res = await fetch("https://formsubmit.co/ajax/04mehakshehzadi@gmail.com", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          email,
+          subject,
+          message,
+          _subject: `Portfolio contact: ${subject}`,
+          _template: "table",
+          _captcha: "false",
+        }),
+      });
+      if (!res.ok) throw new Error(`Email service responded ${res.status}`);
+
       setStatus("success");
       e.currentTarget.reset();
     } catch (err) {
       console.error(err);
       setStatus("error");
-      setError("Something went wrong. Please try again or email me directly.");
+      setError("Something went wrong while sending your message. Please try again or email me directly at 04mehakshehzadi@gmail.com.");
     }
   };
 
@@ -922,7 +955,7 @@ function Contact() {
               <p className="mt-3 text-xs text-destructive">{error}</p>
             )}
             {status === "success" && (
-              <p className="mt-3 text-xs text-green-400">Thanks! Your message is on its way.</p>
+              <p className="mt-3 text-xs text-green-400">Thank you! Your message has been sent successfully.</p>
             )}
 
             <button
@@ -1063,6 +1096,8 @@ function Footer() {
               <h4 className="text-sm font-semibold">Say hello</h4>
               <div className="mt-3 flex flex-col gap-2 text-sm text-muted-foreground">
                 <a href={`mailto:${social.email}`} className="hover:text-foreground">{social.email}</a>
+                <a href={social.github} target="_blank" rel="noreferrer" className="hover:text-foreground">github.com/vibxanu</a>
+                <a href={social.linkedin} target="_blank" rel="noreferrer" className="hover:text-foreground">linkedin.com/in/vibxanu</a>
                 <span>Sialkot, Pakistan</span>
               </div>
               <div className="mt-4 flex gap-2">
